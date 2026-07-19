@@ -1,0 +1,15 @@
+pfas,algae_species,endpoint,value,time,source
+PFOA,Chlamydomonas reinhardtii,growth EC50,51.9 mg/L,96 h,Wang et al. 2013 Aquat Toxicol (PMID 24464740)
+PFOA,Scenedesmus obliquus,growth EC50,44.0 mg/L,96 h,Wang et al. 2013 (PMID 24464740)
+PFOA,Raphidocelis subcapitata,growth EC50 / NOEC,EC50 49 mg/L; NOEC 12.5 mg/L,96 h,ECOTOX-indexed (via review; record not independently pulled)
+PFOA,Chlorella pyrenoidosa,growth EC50,191-207 mg/L,96 h,STOTEN S0043135420307855 / S0048969720379626
+PFOA,Selenastrum capricornutum,growth EC50,207 mg/L,96 h,Water Res S0043135420307855
+PFOS,Chlorella pyrenoidosa,growth EC50,320 mg/L,96 h,secondary (review); ECOTOX record not confirmed
+PFOS,Scenedesmus obliquus,growth EC50,126-137 mg/L,96 h-7 d,Env Pollut S0269749122016116
+PFOS,Raphidocelis subcapitata,growth EC50,57-71 mg/L,12 d,Zhang 2023 (via ETC 44:995)
+PFBS,Scenedesmus obliquus,growth EC50,>1800 mg/L,7 d,Env Pollut S0269749122016116
+PFBA,Chlorella vulgaris,growth EC50 (hormetic),154.88 mg/L,96 h,J Env Sci S0013935125004797
+PFBA,Raphidocelis subcapitata,growth EC50,31 mg/L,~72 h,comparative tox (PMID 39068881)
+PFDA,Raphidocelis subcapitata,growth inhibition,"most toxic of 10 PFAS; no numeric EC50",,PMID 39068881
+PFNA,Raphidocelis subcapitata,transcriptomic POD,1041 ug/L,24 h,ETC 44:995
+6:2 FTS,Raphidocelis subcapitata,growth EC50,125 mg/L,72 h,Hoke et al. 2015 (via ETC 44:995)

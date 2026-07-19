@@ -82,6 +82,52 @@ hydrophobic; ΔG < 0 = hydrophobic. Botryococcus braunii is decisively most hydr
 ## bubble_score and lowEPS_score encodings
 
 These two CSV columns are 0-1 encodings, NOT measured values: `bubble_score` = normalized
-growth-rate + O2-evolution vigor (from the availability/O2 dataset); `lowEPS_score` = inverse of
-the EPS ranking above. They are grounded in real literature but are semi-quantitative rankings,
-and should be replaced with direct measurements as they become available.
+growth-rate + O2-evolution vigor; `lowEPS_score` = inverse of the EPS ranking above. They are
+grounded in real literature but are semi-quantitative rankings. The CSV now also carries the raw
+measured `mu_max_per_day` and `cell_diameter_um` alongside them (see below), so the encodings can
+be replaced with harmonized measured values via the bulk trait DBs.
+
+## Functional traits (mu_max, cell size) and the bulk-pull path
+
+Per-species `mu_max_per_day` and `cell_diameter_um` are from strain-specific culture papers and
+the Litchman/Edwards trait-compilation lineage; conditions (light, temperature, trophic mode)
+differ across rows, so raw mu is not perfectly cross-comparable (flagged per row). For a
+harmonized bulk pull (recommended before hard-coding these into the score):
+- **BCO-DMO "Phytoplankton Traits" (Litchman/Klausmeier/Edwards, MSU), CC-BY-4.0:**
+  temp optima `bco-dmo.org/dataset/544801` (temp_traits.csv); growth-rate raw series
+  `bco-dmo.org/dataset/544814` (growth_rates.csv); cell biovolumes
+  `bco-dmo.org/dataset/636302` (nut_traits_T3.csv).
+- **Kremer et al. 2014**, *Ecology* 95:2984, "A compendium of cell and natural unit biovolumes
+  for >1200 freshwater phytoplankton species" (doi:10.1890/14-0603.1; Wiley/Figshare) - the best
+  freshwater biovolume source for Scenedesmus/Desmodesmus/Ankistrodesmus/Anabaena/Microcystis.
+
+## Taxonomy (AlgaeBase accepted names; corrections applied)
+
+Several requested binomials are now synonyms of different accepted names (recorded in the
+`accepted_name` column): Scenedesmus dimorphus -> *Tetradesmus dimorphus*; S. obliquus ->
+*Tetradesmus obliquus*; Chlorococcum littorale -> *Alvikia littoralis*; Botryococcus sudeticus ->
+*Botryosphaerella sudetica* (Chlorophyceae, distinct from true *B. braunii* which is
+Trebouxiophyceae); Anabaena variabilis -> *Trichormus variabilis*; Amphora coffeaeformis ->
+*Halamphora coffeiformis*; Nannochloris oculata -> *Picochlorum oculatum* (a green alga, NOT the
+eustigmatophyte *Nannochloropsis oculata*). Source: AlgaeBase (algaebase.org).
+
+## Cell-wall biochemistry (predictor input; see cell_wall_features.csv)
+
+Confirmed **algaenan** producers (aliphatic, hydrophobic wall biopolymer): *Nannochloropsis*,
+*Botryococcus braunii*, and the *Scenedesmus/Tetradesmus/Desmodesmus* trilaminar-sheath complex.
+Non-algaenan (glycoprotein / cellulosic / wall-less): *Chlamydomonas* (HRGP), *Tetraselmis*
+(theca), *Dunaliella* (wall-less), *Chlorella vulgaris* (lacks classic TLS, Bernaerts 2022).
+N/A: cyanobacteria (peptidoglycan/LPS), diatoms (silica frustule). Genomes: most greens are in
+JGI PhycoCosm / NCBI (see the genome column in the genome-features research). Sources: Scholz et
+al. 2014; Metzger & Largeau 2005; Voigt/Frank 2024; Hoiczyk & Hansel 2000; JGI PhycoCosm.
+
+## PFAS physicochemistry and algae toxicity (data/pfas_physchem.csv, pfas_algae_toxicity.csv)
+
+Physchem: MW and logKow (PubChem XLogP, a *computed* Crippen value, labeled "calc") from PubChem
+PUG-REST; DTXSID/CAS cross-verified via EPA HERO/IRIS mirrors (the CompTox Dashboard is a JS SPA
+and did not scrape); pKa values are ATSDR *estimates* (Toxicological Profile Table 4-2) and the
+field is genuinely unsettled (PFAS acids are essentially fully dissociated at environmental pH).
+Bulk pull: EPA CompTox **Batch Search** accepts a DTXSID list -> TSV/Excel (use the DTXSIDs in
+`pfas_physchem.csv`); the EPA "EPAPFASRL" list bundles ~400 PFAS DTXSIDs. Toxicity: algal EC50s
+from primary/ECOTOX-indexed literature; note that EPA ECOTOX covers only ~7 PFAS for algae, so
+most short-chain/sulfonate/FTS compounds have no clean algal EC50 (a real, flagged gap).

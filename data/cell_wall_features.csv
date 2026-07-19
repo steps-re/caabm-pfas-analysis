@@ -1,0 +1,21 @@
+species,accepted_name,class,wall_type,algaenan,genome,contact_angle_deg,ca_source
+Botryococcus braunii,Botryococcus braunii,Trebouxiophyceae,algaenan-TLS,yes,yes,112.3,Ozkan2012 diss
+Botryococcus sudeticus,Botryosphaerella sudetica,Chlorophyceae,uncertain (low-hydrocarbon),unknown,yes,94.3,Ozkan2012 diss
+Ankistrodesmus falcatus,Ankistrodesmus falcatus,Chlorophyceae,glycoprotein/neutral-sugar,no,mito-only,85.6,Ozkan2012 diss
+Scenedesmus dimorphus,Tetradesmus dimorphus,Chlorophyceae,algaenan-TLS,yes,yes,58.4,Ozkan2012 diss
+Scenedesmus obliquus,Tetradesmus obliquus,Chlorophyceae,algaenan-TLS,yes,yes,34,Desmodesmus proxy Xia2017
+Desmodesmus bijugatus,Desmodesmus bijugatus,Chlorophyceae,algaenan-TLS,yes,genus,35,Xia2017 PLOS
+Chlorella vulgaris,Chlorella vulgaris,Trebouxiophyceae,cellulose/glucosamine (no TLS),no,yes,42.7,Ozkan2012 diss
+Nannochloris oculata (green),Picochlorum oculatum,Trebouxiophyceae,cellulose (presumed),unknown,yes,39.5,Ozkan2012 diss
+Chlorella sorokiniana,Chlorella sorokiniana,Trebouxiophyceae,cellulose/glucosamine,unknown,yes,,gap
+Chlamydomonas reinhardtii,Chlamydomonas reinhardtii,Chlorophyceae,HRGP glycoprotein,no,yes,,gap
+Tetraselmis suecica,Tetraselmis suecica,Chlorodendrophyceae,glycoprotein theca,no,yes,,gap
+Dunaliella salina,Dunaliella salina,Chlorophyceae,wall-less/glycoprotein coat,no,yes,,gap
+Nannochloropsis oculata,Nannochloropsis oculata,Eustigmatophyceae,cellulose+algaenan,yes,yes,,gap (algaenan => expected hydrophobic)
+Amphora coffeaeformis,Halamphora coffeiformis,Bacillariophyceae,silica frustule,na,partial,73.9,Ozkan2012 diss
+Cylindrotheca fusiformis,Cylindrotheca fusiformis,Bacillariophyceae,silica frustule,na,transcriptome,91.5,Ozkan2012 diss
+Nitzschia frustulum,Nitzschia frustulum,Bacillariophyceae,silica frustule,na,yes,55.8,Ozkan2012 diss
+Microcystis aeruginosa,Microcystis aeruginosa,Cyanophyceae,peptidoglycan/LPS+mucilage,na,yes,22,Zhu2023
+Anabaena variabilis,Trichormus variabilis,Cyanophyceae,peptidoglycan/LPS,na,yes,105,Hao2017 via Zhu2023
+Synechococcus sp.,Synechococcus sp.,Cyanophyceae,peptidoglycan/LPS,na,yes,64,Ozkan2013 via Yang2023
+Synechocystis sp.,Synechocystis sp. PCC 6803,Cyanophyceae,peptidoglycan/LPS+synechan,na,yes,,gap
