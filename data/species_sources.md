@@ -101,6 +101,18 @@ harmonized bulk pull (recommended before hard-coding these into the score):
   for >1200 freshwater phytoplankton species" (doi:10.1890/14-0603.1; Wiley/Figshare) - the best
   freshwater biovolume source for Scenedesmus/Desmodesmus/Ankistrodesmus/Anabaena/Microcystis.
 
+**Bulk-pull outcome (2026-07-19).** The BCO-DMO CSVs were downloaded and parsed directly. Result:
+the harmonized cell BIOVOLUMES cross-validate our `cell_diameter_um` values (BCO-DMO ESD vs ours:
+Ankistrodesmus 7.5/7.4, Chlorella 3.7/3.5, Scenedesmus 7.0/8, Chlamydomonas 6.0, Tetraselmis 7.7,
+Dunaliella 6.3, Microcystis 5.0, Synechocystis 2.5 - all consistent). But the compilation's
+GROWTH rates are strain-specific and marine-skewed (e.g. Chlorella 0.15/d from a cold strain; a
+Nitzschia entry that is actually Pseudo-nitzschia; the anomalous Nannochloris 3.13/d), so they are
+NOT a clean drop-in for our freshwater target strains' mu_max. Conclusion: cell sizes are now
+compilation-validated; `bubble_score` stays a documented growth-vigor encoding rather than being
+overwritten with mismatched cross-study growth rates. Attempting the pull was the right call; the
+honest finding is that a clean measured mu_max per target strain still requires strain-specific
+sources, not a genus match against a marine-focused compilation.
+
 ## Taxonomy (AlgaeBase accepted names; corrections applied)
 
 Several requested binomials are now synonyms of different accepted names (recorded in the
