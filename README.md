@@ -33,7 +33,8 @@ caabm-pfas-analysis/
 │   ├── species_screen.py           # deterministic strain-ranking rubric
 │   ├── surface_predictor.py        # genome/cell-wall -> hydrophobicity (honest negative result)
 │   ├── staging_model.py            # multi-stage / recycle removal compounding (extent path)
-│   └── pfas_qsar.py                # structure->K_ia QSAR classifying all 16 PFAS
+│   ├── pfas_qsar.py                # structure->K_ia QSAR classifying all 16 PFAS
+│   └── dose_response_model.py      # predicts optimal coagulant dose (isoelectric-point model)
 ├── DATASETS.md              # curated catalog of datasets for this + future modeling
 ├── data/                    # values extracted from Ni et al. (2026) SI + literature (cited)
 │   ├── ni2026_removal.csv
@@ -65,6 +66,7 @@ python species_screen.py           # ranks 22 candidate strains; retrodicts Anki
 python surface_predictor.py        # tests genome/cell-wall -> hydrophobicity (returns a clean negative result)
 python staging_model.py            # how ~10-14%/pass compounds to >90% removal over N stages
 python pfas_qsar.py                 # classifies all 16 PFAS foam-removable vs charge-dependent (logKow r=0.99)
+python dose_response_model.py       # predicted optimal coagulant dose + zeta-titration procedure
 ```
 
 ## Data provenance & honesty
