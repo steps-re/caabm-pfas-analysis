@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: "If you use this analysis, please cite it as below, and cite the subject paper (Ni et al. 2026)."
+title: "A first-principles analysis of coagulant-assisted algae-bubble foam fractionation for PFAS removal"
+authors:
+  - family-names: German
+    given-names: Michael
+    affiliation: Steps Ventures
+type: article
+year: 2026
+url: "https://github.com/steps-re/caabm-pfas-analysis"
+repository-code: "https://github.com/steps-re/caabm-pfas-analysis"
+license: CC-BY-4.0
+abstract: >-
+  An independent, reproducible mechanistic and quantitative analysis of Ni et al.
+  (2026, Environ. Eng. Sci., doi:10.1177/15579018261469619). Establishes from first
+  principles that the coagulant-assisted algae-bubble matrix is a flotation process
+  whose air-water interface is the sorbent; that short-chain PFAS removal cannot be
+  foam fractionation (a ~50x interfacial-adsorption penalty vs an observed ~1.2x
+  removal ratio) and is instead a chain-length-independent electrostatic capture
+  enabled by the coagulant; and that cell surface charge is the decisive
+  species-selection variable. Provides a deterministic strain-screening rubric that
+  retrodicts the observed result.
+references:
+  - type: article
+    title: "Boosting the Removal Rate of PFAS by Algae Through Coagulant-Assisted Algae-Bubble Matrix"
+    authors:
+      - family-names: Ni
+        given-names: Pan
+      - family-names: Duan
+        given-names: Yufei
+      - family-names: Sun
+        given-names: Qingqing
+      - family-names: Mai
+        given-names: Jiamin
+      - family-names: Xiao
+        given-names: Feng
+      - family-names: Deng
+        given-names: Baolin
+    year: 2026
+    journal: "Environmental Engineering Science"
+    doi: "10.1177/15579018261469619"

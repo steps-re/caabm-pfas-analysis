@@ -1,0 +1,7 @@
+species,support_media,coagulant,coagulant_ppm,PFBA_removal_pct,PFOA_removal_pct,source
+Chlorella sp.,glass wool,none,0,0,0,NI2026 Fig3/Fig6 (16-PFAS column run)
+Ankistrodesmus falcatus,cotton,none,0,4.2,4.4,NI2026 Fig5
+Ankistrodesmus falcatus,cotton,pDADMAC,1,7.5,13.9,NI2026 Fig5
+Ankistrodesmus falcatus,cotton,FeCl3,100,10.3,12.7,NI2026 Fig5
+Ankistrodesmus falcatus,cotton,alum,60,0,3,NI2026 Fig5
+Ankistrodesmus falcatus,cotton,pDADMAC,100,1.8,1.3,NI2026 Fig5 (over-dose / charge reversal)

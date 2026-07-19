@@ -1,0 +1,12 @@
+pfas,carbons,mw,cls,kia_cm,gamma_mol_m2,gamma_per_nm2,gamma_rel_pfoa
+PFBA,4,214.04,carboxylate,2.850e-05,1.332e-11,8.018e-06,0.019
+PFPeA,5,264.05,carboxylate,9.012e-05,3.413e-11,2.055e-05,0.050
+PFHxA,6,314.05,carboxylate,2.850e-04,9.075e-11,5.465e-05,0.132
+PFHpA,7,364.06,carboxylate,9.012e-04,2.476e-10,1.491e-04,0.360
+PFOA,8,414.07,carboxylate,2.850e-03,6.883e-10,4.145e-04,1.000
+PFNA,9,464.08,carboxylate,9.012e-03,1.942e-09,1.169e-03,2.822
+PFDA,10,514.08,carboxylate,2.850e-02,5.544e-09,3.339e-03,8.055
+PFUnA,11,564.09,carboxylate,9.012e-02,1.598e-08,9.621e-03,23.213
+PFBS,4,300.1,sulfonate,2.850e-05,9.497e-12,5.719e-06,0.014
+PFHxS,6,400.11,sulfonate,2.850e-04,7.123e-11,4.289e-05,0.103
+PFOS,8,500.13,sulfonate,2.850e-03,5.699e-10,3.432e-04,0.828

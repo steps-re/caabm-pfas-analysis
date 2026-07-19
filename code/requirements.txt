@@ -1,0 +1,8 @@
+# The analysis code uses only the Python standard library (csv, os, math).
+# Tested on CPython 3.8+. No third-party packages required.
+#
+# To reproduce every number in the manuscript:
+#   python interfacial_adsorption.py   # chain-length ladder + Gamma ratios
+#   python flotation_ceiling.py        # removal ceiling vs observed
+#   python dlvo_barrier.py             # Chlorella vs Ankistrodesmus barrier
+#   python species_screen.py           # deterministic strain ranking

@@ -1,0 +1,8 @@
+species,strain,zeta_mV,zeta_pH,contact_angle_deg,cell_size_um,growth_rate,EPS_level,toxin,bubble_score,lowEPS_score,DAF_note,confidence,source
+Chlorella sorokiniana,UTEX 1230 / CCAP 211/8K / NIES-2168,-16.3,7-8,,2-4.5,fast/thermotolerant,low-med,no,0.9,0.6,coag-assisted DAF 94.5-98.4%,high,"Ozkan2013; harvesting lit."
+Scenedesmus dimorphus,,-12,7.5,49,,medium,unknown,no,0.6,,~0 zeta at pH7.5; highest measured CA in clean set,medium,"harvesting/coag lit."
+Ankistrodesmus falcatus,Carolina 151955,-13.8,6.1,,fusiform,medium,med (TOC rise),no,0.6,0.4,worked in NI2026 (4-14%),high,NI2026
+Chlorella sp.,Carolina 152066,-24.5,6.1,,2-6,fast,med,no,0.8,0.4,failed in NI2026 (0%),high,NI2026
+Botryococcus braunii,,-30,alkaline,84.9,colonial,slow,high,no,0.2,0.2,true self-flotation; hydrophobicity reference,medium,"harvesting lit."
+Scenedesmus obliquus,,-36,7,34.9,,fast,med,no,0.7,0.5,classic DAF model but hydrophilic + most negative,high,"Garg2012/2014; harvesting lit."
+Microcystis aeruginosa,,-11.5,7,,colonial,medium,high,yes,0.5,,gas-vacuolate self-floater but microcystin producer,medium,"cyanobacteria lit. (TOXIN-GATED)"

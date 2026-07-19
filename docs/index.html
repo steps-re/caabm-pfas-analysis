@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A First-Principles Analysis of Coagulant-Assisted Algae-Bubble Foam Fractionation for PFAS Removal</title>
+<meta name="description" content="Independent mechanistic and quantitative analysis of Ni et al. (2026), with a deterministic species-selection framework for the coagulant-assisted algae-bubble matrix (CAABM).">
+<style>
+  :root{
+    --ground:#FAFBFB; --ink:#12211F; --muted:#55696A; --faint:#7C8D8B;
+    --teal:#0B6E63; --teal-deep:#084A43; --clay:#B0532E; --green:#2E7D53;
+    --line:#DBE4E2; --panel:#F0F5F3; --panel2:#E9F1EE; --panelclay:#F7EEE8;
+    --serif:'Charter','Bitstream Charter','Iowan Old Style','Georgia',serif;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,'SF Mono','SFMono-Regular',Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--ground);color:var(--ink);
+    font-family:var(--serif);font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px 120px}
+  .col{max-width:700px}
+  a{color:var(--teal);text-underline-offset:2px}
+  h1,h2,h3{font-family:var(--sans);line-height:1.16;text-wrap:balance;font-weight:680}
+  h2{font-size:25px;margin:52px 0 4px;letter-spacing:-0.01em;scroll-margin-top:20px}
+  h2 .s{font-family:var(--mono);font-size:15px;color:var(--teal);font-weight:600;margin-right:10px}
+  h3{font-size:18px;margin:28px 0 2px;font-weight:660}
+  p{margin:13px 0}
+  strong{font-weight:660}
+  em.term{font-style:normal;font-weight:600;color:var(--teal-deep)}
+  sup.ref{font-family:var(--mono);font-size:.68em;color:var(--teal);font-weight:600}
+  sup.ref a{text-decoration:none}
+
+  header{padding:60px 0 24px;border-bottom:2px solid var(--teal-deep)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-deep)}
+  h1{font-size:37px;margin:14px 0 14px;letter-spacing:-0.02em;max-width:800px}
+  .byline{font-family:var(--sans);font-size:15px;color:var(--muted);margin:0 0 4px}
+  .byline b{color:var(--ink);font-weight:600}
+  .metarow{display:flex;flex-wrap:wrap;gap:4px 22px;font-family:var(--mono);font-size:12px;color:var(--faint);margin-top:10px}
+  .metarow b{color:var(--ink);font-weight:600}
+
+  .abstract{margin:26px 0 6px;padding:20px 22px;background:var(--panel);border-radius:5px;border:1px solid var(--line)}
+  .abstract .cap{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:8px}
+  .abstract p{margin:9px 0;font-size:16.5px;line-height:1.55}
+
+  .toc{font-family:var(--sans);font-size:14px;color:var(--muted);margin:20px 0 0;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:4px 18px}
+  .toc a{color:var(--teal-deep);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+
+  .eq{margin:20px 0;padding:16px 18px;background:var(--panel);border-left:3px solid var(--teal);border-radius:0 4px 4px 0}
+  .eq .formula{font-family:var(--mono);font-size:15px;color:var(--teal-deep);line-height:1.7;overflow-x:auto}
+  .eq .where{font-size:14px;color:var(--muted);margin-top:8px}
+  .eq sub,.eq sup{font-size:.72em}
+
+  .tw{overflow-x:auto;margin:22px 0}
+  table{border-collapse:collapse;width:100%;font-size:14px;font-family:var(--sans)}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1.5px solid #C7D4D1}
+  tbody tr:hover{background:var(--panel)}
+  td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .rowlead{font-weight:640}
+  caption{caption-side:bottom;text-align:left;font-size:12.5px;color:var(--faint);font-family:var(--sans);padding-top:8px;line-height:1.4}
+
+  .chip{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.03em;padding:1px 7px;border-radius:3px;vertical-align:middle;white-space:nowrap}
+  .c-hi{background:#E3F1E8;color:#215B3B} .c-med{background:#FBF0DA;color:#7A5410} .c-lo{background:#F3E5DE;color:#8A4322}
+  .c-clay{background:var(--panelclay);color:var(--clay)}
+
+  .note{margin:20px 0;padding:14px 18px;border:1px solid var(--line);border-radius:4px;background:#fff;font-size:15.5px;line-height:1.55}
+  .note.wall{border-color:#E4C8B8;background:var(--panelclay)}
+  .note .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);display:block;margin-bottom:5px}
+  .note.key .lbl{color:var(--teal-deep)}
+  .note.key{border-color:#BFD9D2;background:var(--panel2)}
+
+  .frame{margin:22px 0;border:1px solid #BFD9D2;border-radius:5px;background:#fff}
+  .frame .hd{background:var(--panel2);padding:12px 18px;font-family:var(--mono);font-weight:600;font-size:14.5px;border-bottom:1px solid #CDE0DB;color:var(--teal-deep);overflow-x:auto}
+  .frame .bd{padding:6px 18px 16px}
+
+  ul.tight{margin:10px 0;padding-left:22px} ul.tight li{margin:6px 0}
+  ol.steps{margin:12px 0;padding-left:22px} ol.steps li{margin:9px 0;padding-left:4px}
+
+  .refs{font-size:13.5px;line-height:1.5;font-family:var(--sans);color:var(--ink)}
+  .refs ol{padding-left:0;counter-reset:r;list-style:none}
+  .refs li{counter-increment:r;position:relative;padding:8px 0 8px 40px;border-bottom:1px solid var(--line)}
+  .refs li::before{content:"["counter(r)"]";position:absolute;left:0;top:8px;font-family:var(--mono);font-size:12px;color:var(--teal);font-weight:600}
+  .refs .doi{font-family:var(--mono);font-size:12px}
+
+  footer{margin-top:44px;padding-top:22px;border-top:2px solid var(--teal-deep);font-size:13.5px;color:var(--muted);font-family:var(--sans);line-height:1.55}
+  footer h2{font-size:16px;color:var(--ink);margin:26px 0 8px}
+  .lic{font-size:12.5px;color:var(--faint);margin-top:18px}
+  @media (max-width:560px){ body{font-size:16.5px} h1{font-size:29px} h2{font-size:21px} .abstract p{font-size:15.5px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Working paper &middot; independent analysis &middot; not peer-reviewed</div>
+  <h1>A first-principles analysis of coagulant-assisted algae-bubble foam fractionation for PFAS removal</h1>
+  <p class="byline"><b>Michael German</b>, Steps Ventures &nbsp;&middot;&nbsp; <span style="color:var(--faint)">an outside mechanistic reading of Ni, Duan, Sun, Mai, Xiao &amp; Deng (2026)</span></p>
+  <div class="metarow">
+    <span><b>Subject paper</b> Environ. Eng. Sci., doi:10.1177/15579018261469619</span>
+    <span><b>Version</b> 1.0 &middot; 2026-07-19</span>
+    <span><b>Code + data</b> github.com/steps-re/caabm-pfas-analysis</span>
+  </div>
+</header>
+
+<div class="col">
+
+<div class="abstract">
+  <div class="cap">Abstract</div>
+  <p>Ni et al. (2026) report a coagulant-assisted algae-bubble matrix (CAABM) that removes per- and polyfluoroalkyl substances (PFAS) using oxygen bubbles generated in situ by microalgal photosynthesis, achieving 7&ndash;14% removal in 97 minutes and a reported rate enhancement of up to 428&times; over prior algal methods. This note reconstructs the governing physics from first principles and reconciles it quantitatively against the authors' own supplementary data. Three conclusions follow. <strong>First</strong>, the process is flotation, not adsorption: the air-water interface is the sorbent, and the algae manufacture and stabilize it. <strong>Second</strong>, air-water interfacial adsorption falls roughly threefold per carbon, placing short-chain PFBA about 50&times; below PFOA, so foam fractionation is physically barred from removing PFBA; the coagulant works by switching the mechanism to a nearly chain-length-independent electrostatic capture, which the authors' own PFOA/PFBA removal ratio (~1.2&times;, versus the ~50&times; foam fractionation demands) confirms. <strong>Third</strong>, cell surface charge is the decisive selection variable, as the Chlorella (&minus;24.5 mV, 0% removal) versus Ankistrodesmus (&minus;13.8 mV, 4&ndash;14%) contrast and the pDADMAC over-dose reversal both demonstrate. We recast the authors' proposed multi-decade search for a better organism as a deterministic screen over four measurable traits, provide a reproducible scoring function and candidate shortlist, and note that the screen retrodicts the observed Ankistrodesmus-over-Chlorella result. All computations and extracted data are openly available.</p>
+</div>
+
+<nav class="toc">
+  <a href="#s1">1 System</a><a href="#s2">2 Chain-length wall</a><a href="#s3">3 Coagulant</a>
+  <a href="#s4">4 Charge selection</a><a href="#s5">5 The 428&times;</a><a href="#s6">6 Ideal organism</a>
+  <a href="#s7">7 Deterministic screen</a><a href="#s8">8 Next steps</a><a href="#s9">9 Caveats</a>
+  <a href="#methods">Methods</a><a href="#refs">References</a>
+</nav>
+
+<h2 id="s1"><span class="s">1</span>The system, in mechanistic terms</h2>
+<p>Reduced to its physics, the device is a <strong>flotation</strong> process, not a sorbent bed. Removal is not the algae adsorbing PFAS. The authors' batch tests settle this: living cells, dead cells, glass wool, and cells-on-wool all give effluent/influent ratios C<sub>t</sub>/C<sub>0</sub> &ge; 1 on a rotator<sup class="ref"><a href="#r1">[1]</a></sup>. With no accumulating bubbles, nothing is removed. Removal appears only in the illuminated column, where photosynthesis generates O<sub>2</sub> bubbles in place.</p>
+<p>So the true adsorbent is the <strong>air-water interface itself</strong>. The algae do three jobs: they manufacture interface (O<sub>2</sub> bubbles) from sunlight with no aeration energy; they act as particles that stabilize the froth; and, once charge-neutralized, they and the coagulant flocs ferry PFAS that could not otherwise reach the interface. The controlling framework is the flotation capture product,</p>
+<div class="eq">
+  <div class="formula">P&nbsp;=&nbsp;P<sub>collision</sub> &middot; P<sub>attachment</sub> &middot; (1 &minus; P<sub>detachment</sub>)</div>
+  <div class="where">the probability a target is captured and retained (Sutherland 1948<sup class="ref"><a href="#r17">[17]</a></sup>; Mika &amp; Fuerstenau 1968<sup class="ref"><a href="#r18">[18]</a></sup>; consolidated in Nguyen &amp; Schulze 2004<sup class="ref"><a href="#r7">[7]</a></sup>). Every lever below acts on one of these three terms.</div>
+</div>
+<p>A subtlety makes surface chemistry decisive. In the thin bubble/water/cell film the van der Waals force is <em>also</em> repulsive, because air's Hamaker constant is near zero, so once the electrical double layers repel, the <strong>hydrophobic attraction is the only force left</strong> pulling a cell onto a bubble<sup class="ref"><a href="#r9">[9]</a></sup><sup class="ref"><a href="#r10">[10]</a></sup>. And three charged actors are all negative at once: the bubble surface (&zeta; &asymp; &minus;35 mV<sup class="ref"><a href="#r6">[6]</a></sup>), the cell, and the PFAS head group. Everything repels everything. That framing explains what follows.</p>
+
+<h2 id="s2"><span class="s">2</span>The chain-length wall</h2>
+<p>PFAS are surfactants; foam fractionation removes them because they adsorb at the air-water interface. Equilibrium loading follows the Gibbs isotherm, which in the dilute (linear) regime relevant here reduces to a partition coefficient:</p>
+<div class="eq">
+  <div class="formula">&Gamma;&nbsp;=&nbsp;&minus;(1&nbsp;/&nbsp;mRT)&nbsp;(d&gamma;&nbsp;/&nbsp;d&nbsp;ln&nbsp;C)&nbsp;&nbsp;&#8594;&nbsp;&nbsp;&Gamma;&nbsp;=&nbsp;K<sub>ia</sub>&nbsp;C<sub>w</sub></div>
+  <div class="where">&Gamma; = interfacial surface excess (mol m&#8315;&sup2;); K<sub>ia</sub> = air-water interfacial adsorption coefficient (length). At ug/L concentrations K<sub>ia</sub> sits at its constant maximum<sup class="ref"><a href="#r2">[2]</a></sup>.</div>
+</div>
+<p>K<sub>ia</sub> is where chain length enters, and steeply. Lyu et al. (Brusseau group) measured, for perfluorocarboxylates, <strong>log K<sub>ia</sub> rising ~0.46&ndash;0.56 per carbon</strong> (&times;3 per carbon), anchored at K<sub>ia</sub>(PFOA) = 0.00285 cm<sup class="ref"><a href="#r2">[2]</a></sup>; the accumulation of long-chain PFAS at the interface is directly observed<sup class="ref"><a href="#r3">[3]</a></sup>. The thermodynamic root is that each &ndash;CF<sub>2</sub>&ndash; contributes ~<strong>&minus;5.1 kJ/mol</strong> of adsorption free energy, about twice a &ndash;CH<sub>2</sub>&ndash; (&minus;2.6 kJ/mol)<sup class="ref"><a href="#r4">[4]</a></sup><sup class="ref"><a href="#r5">[5]</a></sup>. Carried through the surface excess, PFBA sits ~<strong>50&times; below PFOA</strong> (36&ndash;90&times; across the measured slope range).</p>
+<div class="tw">
+<table>
+  <caption>Table 1. Relative interfacial adsorption and the foam-fractionation removal ceiling in the authors' column. Ceiling is an optimistic upper bound (full &Gamma; removed per unit bubble area); its width reflects the 16&times; range in photosynthetic O<sub>2</sub> rate<sup class="ref"><a href="#r19">[19]</a></sup> and bubble radius (0.05&ndash;0.5 mm). Reproduce with <span style="font-family:var(--mono)">flotation_ceiling.py</span>.</caption>
+  <thead><tr><th>Compound</th><th>Carbons</th><th>&Gamma; / &Gamma;(PFOA)</th><th>Foam-FF ceiling</th><th>Observed (algae only)<sup class="ref"><a href="#r1">[1]</a></sup></th></tr></thead>
+  <tbody>
+    <tr><td class="rowlead">PFBA</td><td class="num">4</td><td class="num">0.019&times;</td><td class="num">0.002 &ndash; 0.34%</td><td class="num">4.2%</td></tr>
+    <tr><td class="rowlead">PFOA</td><td class="num">8</td><td class="num">1&times;</td><td class="num">0.21 &ndash; 33.7%</td><td class="num">4.4%</td></tr>
+    <tr><td class="rowlead">PFDA</td><td class="num">10</td><td class="num">8.1&times;</td><td class="num">&gt; feed supply</td><td class="num">removal seen<sup class="ref"><a href="#r1">[1]</a></sup></td></tr>
+  </tbody>
+</table>
+</div>
+<div class="note key">
+  <span class="lbl">The result that needs no assumptions</span>
+  The absolute ceilings carry order-of-magnitude uncertainty; the <b>ratio</b> does not, because O<sub>2</sub> rate, bubble size, and the K<sub>ia</sub> calibration all cancel. If foam fractionation were the mechanism, PFOA must out-remove PFBA by <b>~50&times;</b> (36&ndash;90&times;). The authors observe <b>1.05&times;</b> (algae only) and <b>1.23&times;</b> (with coagulant). Foam fractionation is therefore quantitatively excluded as the PFBA removal path.
+</div>
+<p>The PFOA ceiling (0.2&ndash;34%) comfortably brackets the observed 4.4%: long-chain removal <em>is</em> consistent with photosynthetic-bubble foam fractionation near its interfacial-area-limited ceiling. Short-chain removal is not. That split is the entire story.</p>
+
+<h2 id="s3"><span class="s">3</span>What the coagulant actually does</h2>
+<p>Coagulation alone is a weak PFAS remover, and weakest on short chains: Xiao, Simcik &amp; Gulliver report &le;20% for PFOA/PFOS with alum or ferric<sup class="ref"><a href="#r11">[11]</a></sup>. Adding a cationic partner changes the regime: Maroli et al. take short-chain PFBS past 40% and long chains past 80% with ferric plus a cationic surfactant<sup class="ref"><a href="#r12">[12]</a></sup>. The authors' 1 ppm pDADMAC and 100 ppm FeCl<sub>3</sub> invoke that same charge-pairing mechanism. Critically, the coagulant does not sharpen the chain-length dependence, it <strong>erases</strong> it:</p>
+<div class="tw">
+<table>
+  <caption>Table 2. Ankistrodesmus removal by treatment (Ni et al. 2026, Fig. 5<sup class="ref"><a href="#r1">[1]</a></sup>); data in <span style="font-family:var(--mono)">ni2026_removal.csv</span>.</caption>
+  <thead><tr><th>Treatment</th><th>PFBA</th><th>PFOA</th><th>PFOA/PFBA</th><th>Reading</th></tr></thead>
+  <tbody>
+    <tr><td class="rowlead">algae only</td><td class="num">4.2%</td><td class="num">4.4%</td><td class="num">1.05&times;</td><td>near 2% noise floor</td></tr>
+    <tr><td class="rowlead">+ 1 ppm pDADMAC</td><td class="num">7.5%</td><td class="num">13.9%</td><td class="num">1.85&times;</td><td>charge-pairing engaged</td></tr>
+    <tr><td class="rowlead">+ 100 ppm FeCl<sub>3</sub></td><td class="num">10.3%</td><td class="num">12.7%</td><td class="num">1.23&times;</td><td>best short-chain result</td></tr>
+    <tr><td class="rowlead">+ 60 ppm alum</td><td class="num">0%</td><td class="num">3%</td><td class="num">&mdash;</td><td>weak neutralizer here</td></tr>
+    <tr><td class="rowlead">+ 100 ppm pDADMAC</td><td class="num">1.8%</td><td class="num">1.3%</td><td class="num">&mdash;</td><td style="color:var(--clay);font-weight:600">over-dose: charge reversal</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="note wall">
+  <span class="lbl">The dose-response is the mechanism, in one curve</span>
+  At 100 ppm, pDADMAC performs <b>worse than no coagulant at all</b> (1.8 / 1.3%). This is restabilization: past the isoelectric point the cell surface flips positive, and like-charge repulsion returns, now against the bubble and the excess free polycation. Under-dose and over-dose both fail; the optimum sits at zero net charge. The removal knob is a peak to locate, not a monotone to push, and it is not yet mapped.
+</div>
+
+<h2 id="s4"><span class="s">4</span>Why Chlorella failed and Ankistrodesmus worked</h2>
+<p>The two species differ in one property that matters, and the authors' zeta data isolates it:</p>
+<div class="tw">
+<table>
+  <caption>Table 3. Measured cell zeta potential and removal (Ni et al. 2026, Figs. 4&ndash;5<sup class="ref"><a href="#r1">[1]</a></sup>); data in <span style="font-family:var(--mono)">ni2026_zeta.csv</span>.</caption>
+  <thead><tr><th>Species</th><th>Zeta (BBM, ~pH 6)</th><th>PFOA removal</th><th>PFBA removal</th></tr></thead>
+  <tbody>
+    <tr><td class="rowlead">Chlorella sp.</td><td class="num">&minus;24.5 mV</td><td class="num">0%</td><td class="num">0%</td></tr>
+    <tr><td class="rowlead">Ankistrodesmus falcatus</td><td class="num">&minus;13.8 mV</td><td class="num">4&ndash;14%</td><td class="num">4&ndash;10%</td></tr>
+  </tbody>
+</table>
+</div>
+<p>In flotation the attachment barrier is set by the thin-film disjoining pressure, whose electrostatic term scales, at large separation, with the <strong>product of the two surface potentials</strong><sup class="ref"><a href="#r9">[9]</a></sup><sup class="ref"><a href="#r7">[7]</a></sup>:</p>
+<div class="eq">
+  <div class="formula">W<sub>edl</sub>(D) &nbsp;&#8734;&nbsp; &minus;2&thinsp;&epsilon;<sub>0</sub>&epsilon;&kappa;<sup>2</sup>&thinsp;&psi;<sub>1</sub>&psi;<sub>2</sub>&thinsp;e<sup>&minus;&kappa;D</sup>&nbsp;&nbsp;&nbsp;(large D)</div>
+  <div class="where">Israelachvili Eq. 14.61<sup class="ref"><a href="#r9">[9]</a></sup>. Against a common partner (the &minus;35 mV bubble, or a floc), the repulsion scales with the cell potential &psi;<sub>cell</sub>.</div>
+</div>
+<p>Swapping Chlorella for Ankistrodesmus cuts that repulsive term by <strong>1.8&times;</strong> on the linear scaling, up to 3.2&times; for a symmetric double-layer overlap. Because attachment probability falls roughly exponentially with the barrier, a ~2&times; taller barrier is more than enough to drive P<sub>attachment</sub> from "works" to "zero" (see <span style="font-family:var(--mono);font-size:.85em">dlvo_barrier.py</span>: a 1&ndash;2 order-of-magnitude suppression). Chlorella is not marginally worse; it is on the wrong side of the exponential. The rising effluent TOC (0.39 &rarr; 4.47 mg/L over seven days<sup class="ref"><a href="#r1">[1]</a></sup>) adds the second penalty the ideal organism must avoid: secreted EPS and organic acids that compete for neutralized sites and re-load negative charge.</p>
+
+<h2 id="s5"><span class="s">5</span>The 428&times;, stated so it survives review</h2>
+<p>The headline enhancements are real but they are <strong>rate</strong> ratios, not extents. The residence time here is 1.6 h; the bioaccumulation studies compared against ran 72&ndash;336 h<sup class="ref"><a href="#r1">[1]</a></sup>. Decompose it:</p>
+<div class="eq">
+  <div class="formula">enhancement&nbsp;=&nbsp;(extent&nbsp;ratio)&nbsp;&times;&nbsp;(time&nbsp;ratio)</div>
+  <div class="where">PFBA: 428&times; &asymp; (~3&times; extent) &times; (~150&times; speed). PFOA: 21&times; is essentially all speed &mdash; the PFOA extent (13.9%) is below several prior reports (e.g. Scenedesmus quadricauda, 58%<sup class="ref"><a href="#r1">[1]</a></sup>).</div>
+</div>
+<p>The defensible claim is therefore kinetic: <strong>self-generated bubbles deliver comparable or lower single-pass extent, far faster and with no aeration energy.</strong> That is a strong position for a continuous or staged process and will not be picked apart the way "428&times; better removal" would. Data in <span style="font-family:var(--mono);font-size:.85em">ni2026_literature_comparison.csv</span>.</p>
+
+<h2 id="s6"><span class="s">6</span>What the ideal organism looks like</h2>
+<p>The phenotype falls out of the physics. Four traits, ranked by the strength of the existing evidence that they matter:</p>
+<div class="tw">
+<table>
+  <thead><tr><th>#</th><th>Trait</th><th>Term it moves</th><th>Evidence</th></tr></thead>
+  <tbody>
+    <tr><td class="num">1</td><td class="rowlead">Least-negative zeta in the treatment water</td><td>P<sub>attachment</sub> and PFAS binding. The Chlorella/Ankistrodesmus split is this variable.</td><td><span class="chip c-hi">measured, decisive</span></td></tr>
+    <tr><td class="num">2</td><td class="rowlead">High cell-surface hydrophobicity (contact angle)</td><td>The only attraction in the bubble-cell film<sup class="ref"><a href="#r10">[10]</a></sup>; deepens the detachment well E = &pi;R&sup2;&gamma;(1&minus;cos&theta;)&sup2;.</td><td><span class="chip c-med">strong, mechanism-critical<sup class="ref"><a href="#r15">[15]</a></sup></span></td></tr>
+    <tr><td class="num">3</td><td class="rowlead">High photosynthetic O<sub>2</sub> output + fast growth</td><td>Generates interfacial area (the sorbent) with zero aeration energy.</td><td><span class="chip c-med">mechanistic</span></td></tr>
+    <tr><td class="num">4</td><td class="rowlead">Low EPS / organic-acid secretion</td><td>Avoids competing anions and charge re-loading (the TOC rise).</td><td><span class="chip c-med">measured trend</span></td></tr>
+    <tr><td colspan="4" style="color:var(--clay);font-weight:600">Gate &middot; non-toxic (no cyanotoxins). Hard filter, not a score.</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="note">
+  <span class="lbl">A correction to the outlook's framing</span>
+  Famously hydrophobic self-floaters like Botryococcus braunii are tempting, but a strong photosynthetic O<sub>2</sub> producer is now a first-order requirement, and Botryococcus is slow-growing with low O<sub>2</sub> output. Trait 3 demotes it. The target is a fast, high-O<sub>2</sub>, non-toxic organism that also sits near zero charge, not the single most hydrophobic cell in nature.
+</div>
+
+<h2 id="s7"><span class="s">7</span>A deterministic screen, not a 20-year hunt</h2>
+<p>Because all four traits are measurable, the search is a ranking function over existing culture collections (UTEX, CCAP, NIES, NCMA), not an open-ended discovery. A concrete, reproducible rubric (<span style="font-family:var(--mono);font-size:.85em">species_screen.py</span>):</p>
+<div class="frame">
+  <div class="hd">S = 100 &middot; G<sub>toxin</sub> &middot; ( 0.35&middot;f<sub>charge</sub> + 0.25&middot;f<sub>hydro</sub> + 0.20&middot;f<sub>bubble</sub> + 0.20&middot;f<sub>lowEPS</sub> )</div>
+  <div class="bd">
+    <ul class="tight">
+      <li><b>f<sub>charge</sub></b> = 1 &minus; |&zeta;| / 40 mV, clamped, in the target matrix. Highest weight: the gate the data proved.</li>
+      <li><b>f<sub>hydro</sub></b> = &theta; / 90&deg; (water contact angle), or MATH% proxy.</li>
+      <li><b>f<sub>bubble</sub></b> = normalized specific growth rate &times; areal O<sub>2</sub> evolution.</li>
+      <li><b>f<sub>lowEPS</sub></b> = 1 &minus; normalized effluent-TOC release.</li>
+      <li><b>G<sub>toxin</sub></b> = 0 if toxigenic, else 1.</li>
+    </ul>
+    <p style="font-size:14px;color:var(--muted);margin:8px 0 2px">Weights encode the evidence ranking above; re-fit once &gt;2 strains are run through the actual column. The point is a written, reproducible screen that ranks any new strain from five measurements.</p>
+  </div>
+</div>
+<div class="tw">
+<table>
+  <caption>Table 4. Screen applied to surveyed species. Missing traits scored neutral (0.5) and flagged. Note the screen ranks Ankistrodesmus above Chlorella sp., retrodicting the observed CAABM result. Full data + provenance in <span style="font-family:var(--mono)">species_candidates.csv</span>.</caption>
+  <thead><tr><th>Rank</th><th>Species / strain</th><th>Zeta</th><th>Contact angle</th><th>Score</th><th>Conf.</th></tr></thead>
+  <tbody>
+    <tr><td class="num">1</td><td class="rowlead">Chlorella sorokiniana <span style="font-weight:400;color:var(--faint);font-family:var(--mono);font-size:11px">UTEX 1230 / CCAP 211/8K</span></td><td class="num">&minus;16.3 mV</td><td class="num">not measured</td><td class="num">63.2</td><td><span class="chip c-hi">high</span></td></tr>
+    <tr><td class="num">2</td><td class="rowlead">Scenedesmus dimorphus</td><td class="num">&minus;12 mV</td><td class="num">49&deg;</td><td class="num">60.1</td><td><span class="chip c-med">medium</span></td></tr>
+    <tr><td class="num">3</td><td class="rowlead">Ankistrodesmus falcatus <span style="font-weight:400;color:var(--faint);font-family:var(--mono);font-size:11px">(worked in CAABM)</span></td><td class="num">&minus;13.8 mV</td><td class="num">not measured</td><td class="num">55.4</td><td><span class="chip c-hi">high</span></td></tr>
+    <tr><td class="num">4</td><td class="rowlead">Chlorella sp. <span style="font-weight:400;color:var(--faint);font-family:var(--mono);font-size:11px">(failed in CAABM)</span></td><td class="num">&minus;24.5 mV</td><td class="num">not measured</td><td class="num">50.1</td><td><span class="chip c-hi">high</span></td></tr>
+    <tr><td class="num">5</td><td class="rowlead">Botryococcus braunii</td><td class="num">strongly &minus;</td><td class="num">84.9&deg;</td><td class="num">40.3</td><td><span class="chip c-med">medium</span></td></tr>
+    <tr><td class="num">&mdash;</td><td class="rowlead" style="color:var(--clay)">Microcystis aeruginosa</td><td class="num">&minus;11.5 mV</td><td class="num">self-floats</td><td class="num">0 (gated)</td><td><span class="chip c-clay">toxin</span></td></tr>
+  </tbody>
+</table>
+</div>
+<div class="note">
+  <span class="lbl">Highest-value single acquisition</span>
+  Measured contact angles exist for only a handful of species, the largest gap in f<sub>hydro</sub>. Ozkan &amp; Berberoglu (2013) measured zeta <em>and</em> hydrophobicity side-by-side for 12 microalgae specifically to predict bubble-particle adhesion<sup class="ref"><a href="#r13">[13]</a></sup><sup class="ref"><a href="#r14">[14]</a></sup>. That dataset populates most of f<sub>hydro</sub> and could reorder the list.
+</div>
+
+<h2 id="s8"><span class="s">8</span>Suggested next steps, in order</h2>
+<ol class="steps">
+  <li><b>Map the coagulant dose-response.</b> Run pDADMAC and FeCl<sub>3</sub> as a fine dose series against measured zeta and locate the isoelectric optimum. Likely a larger near-term gain than any new species, and it directly tests the thesis: peak removal should coincide with zero net zeta.</li>
+  <li><b>Use the column as its own selection engine.</b> Feed mixed environmental communities (surface microlayer, foam, bark biofilm) and serially re-inoculate from the <em>floated</em> fraction. Flotation becomes the selection pressure; sequence the survivors after a dozen cycles. Months, not decades.</li>
+  <li><b>Populate the screen.</b> Acquire the Ozkan &amp; Berberoglu dataset, measure contact angles for the top candidates, and run Chlorella sorokiniana and Scenedesmus dimorphus head-to-head against Ankistrodesmus. Two more column runs turn the rubric weights from assumed to fitted.</li>
+  <li><b>Pursue extent through staging, not chemistry.</b> Single-pass extent is modest by design; a short cascade or recycle loop compounds it while preserving the speed and zero-aeration-energy advantages.</li>
+</ol>
+
+<h2 id="s9"><span class="s">9</span>Open questions and caveats</h2>
+<ul class="tight">
+  <li>The absolute ceiling rests on an O<sub>2</sub> rate spanning 16&times; and an assumed bubble size. The ratio argument does not, so the mechanism conclusion stands even where the absolute ceilings do not.</li>
+  <li>Fate of captured PFAS: foam that drains back re-releases it. Confirming that PFAS leaves with collected foam or biomass, rather than redistributing, matters for any throughput claim.</li>
+  <li>The lipid-rich-biomass disposal argument is attractive but unquantified here; it deserves a mass balance.</li>
+  <li>Several cross-species surface values could not be verified past paywalls; the shortlist uses only verified sources, and unverified encodings (f<sub>bubble</sub>, f<sub>lowEPS</sub>) are coarse literature estimates, flagged as such in the data.</li>
+  <li>This analysis treats the reported values as correct and reasons from them; if any headline number shifts, the arithmetic travels with it.</li>
+</ul>
+
+<footer id="methods">
+  <h2>Methods</h2>
+  <p style="color:var(--ink)"><b>Data extraction.</b> All experimental values were read from the machine-readable supplementary data of Ni et al. (2026)<sup class="ref"><a href="#r1">[1]</a></sup> (removal curves, zeta-vs-pH, effluent TOC, cell counts, and the Fig. 6 literature comparison) and transcribed into the CSV files in <span style="font-family:var(--mono)">/data</span> with per-row provenance. No raw supplementary files are redistributed; only the numeric values used in this analysis are reported, as is standard for a citing work.</p>
+  <p style="color:var(--ink)"><b>Interfacial model.</b> Surface excess is computed as &Gamma; = K<sub>ia</sub>C<sub>w</sub>, with K<sub>ia</sub> from the Brusseau-group per-carbon regression anchored at the measured PFOA value<sup class="ref"><a href="#r2">[2]</a></sup>. The foam-fractionation ceiling equates the PFAS removal rate to &Gamma; times the bubble-interfacial-area generation rate 3Q<sub>g</sub>/r<sub>b</sub>, with Q<sub>g</sub> from per-cell photosynthetic O<sub>2</sub> evolution<sup class="ref"><a href="#r19">[19]</a></sup>. It is an explicit upper bound; ranges propagate the stated input uncertainties.</p>
+  <p style="color:var(--ink)"><b>Electrostatics.</b> Attachment-barrier scaling uses the constant-potential double-layer interaction (Israelachvili Eq. 14.61<sup class="ref"><a href="#r9">[9]</a></sup>) with measured cell zeta as the surface-potential proxy; attachment-probability suppression is illustrated with an Arrhenius factor, presented as scaling, not a fitted prediction.</p>
+  <p style="color:var(--ink)"><b>Reproducibility.</b> All numbers in this note are regenerated by four standard-library Python scripts in <span style="font-family:var(--mono)">/code</span> (<span style="font-family:var(--mono)">interfacial_adsorption.py</span>, <span style="font-family:var(--mono)">flotation_ceiling.py</span>, <span style="font-family:var(--mono)">dlvo_barrier.py</span>, <span style="font-family:var(--mono)">species_screen.py</span>). No third-party dependencies.</p>
+
+  <h2>Data and code availability</h2>
+  <p style="color:var(--ink)">All extracted data, computation code, and the source of this document are at <a href="https://github.com/steps-re/caabm-pfas-analysis">github.com/steps-re/caabm-pfas-analysis</a>. Bibliography with verified DOIs: <span style="font-family:var(--mono)">references.bib</span>.</p>
+
+  <h2 id="refs">References</h2>
+  <div class="refs">
+    <ol>
+      <li id="r1">Ni P, Duan Y, Sun Q, Mai J, Xiao F, Deng B. Boosting the Removal Rate of PFAS by Algae Through Coagulant-Assisted Algae-Bubble Matrix. <i>Environmental Engineering Science</i>, 2026. <span class="doi"><a href="https://doi.org/10.1177/15579018261469619">10.1177/15579018261469619</a></span></li>
+      <li id="r2">Lyu Y, Wang B, Du X, Guo B, Brusseau ML. Air-water interfacial adsorption of C4&ndash;C10 perfluorocarboxylic acids during transport in unsaturated porous media. <i>Science of the Total Environment</i> 831:154905, 2022. <span class="doi"><a href="https://doi.org/10.1016/j.scitotenv.2022.154905">10.1016/j.scitotenv.2022.154905</a></span></li>
+      <li id="r3">Costanza J, Arshadi M, Abriola LM, Pennell KD. Accumulation of PFOA and PFOS at the Air&ndash;Water Interface. <i>Environ. Sci. Technol. Lett.</i> 6(8):487&ndash;491, 2019. <span class="doi"><a href="https://doi.org/10.1021/acs.estlett.9b00355">10.1021/acs.estlett.9b00355</a></span></li>
+      <li id="r4">Jańczuk B, Szymczyk K, Zdziennicka A. Adsorption Properties of Hydrocarbon and Fluorocarbon Surfactants Ternary Mixture at the Water-Air Interface. <i>Molecules</i> 26(14):4313, 2021. <span class="doi"><a href="https://doi.org/10.3390/molecules26144313">10.3390/molecules26144313</a></span></li>
+      <li id="r5">Mukerjee P, Handa T. Adsorption of fluorocarbon and hydrocarbon surfactants to air-water, hexane-water, and perfluorohexane-water interfaces. <i>J. Phys. Chem.</i> 85(15):2298&ndash;2303, 1981. <span class="doi"><a href="https://doi.org/10.1021/j150615a032">10.1021/j150615a032</a></span></li>
+      <li id="r6">Takahashi M. Zeta Potential of Microbubbles in Aqueous Solutions: Electrical Properties of the Gas-Water Interface. <i>J. Phys. Chem. B</i> 109(46):21858&ndash;21864, 2005. <span class="doi"><a href="https://doi.org/10.1021/jp0445270">10.1021/jp0445270</a></span></li>
+      <li id="r7">Nguyen AV, Schulze HJ. <i>Colloidal Science of Flotation</i>. Surfactant Science Series 118, Marcel Dekker, 2004. ISBN 9780824747824.</li>
+      <li id="r8">Nguyen AV, Ralston J, Schulze HJ. On modelling of bubble-particle attachment probability in flotation. <i>Int. J. Miner. Process.</i> 53(4):225&ndash;249, 1998. <span class="doi"><a href="https://doi.org/10.1016/S0301-7516(97)00073-2">10.1016/S0301-7516(97)00073-2</a></span></li>
+      <li id="r9">Israelachvili JN. <i>Intermolecular and Surface Forces</i>, 3rd ed. Academic Press, 2011 (Eq. 14.61). ISBN 9780123919274.</li>
+      <li id="r10">Gomez-Flores A, Bradford SA, Hwang G, Heyes GW, Kim H. Particle-bubble interaction energies for particles with physical and chemical heterogeneities. <i>Minerals Engineering</i> 155:106472, 2020. <span class="doi"><a href="https://doi.org/10.1016/j.mineng.2020.106472">10.1016/j.mineng.2020.106472</a></span></li>
+      <li id="r11">Xiao F, Simcik MF, Gulliver JS. Mechanisms for removal of PFOS and PFOA from drinking water by conventional and enhanced coagulation. <i>Water Research</i> 47(1):49&ndash;56, 2013. <span class="doi"><a href="https://doi.org/10.1016/j.watres.2012.09.024">10.1016/j.watres.2012.09.024</a></span></li>
+      <li id="r12">Maroli AS, Zhang Y, Lubiantoro J, Venkatesan AK. Surfactant-enhanced coagulation and flocculation improves the removal of perfluoroalkyl substances from surface water. <i>Environ. Sci.: Advances</i> 3(12):1714&ndash;1721, 2024. <span class="doi"><a href="https://doi.org/10.1039/d4va00093e">10.1039/d4va00093e</a></span></li>
+      <li id="r13">Ozkan A, Berberoglu H. Physico-chemical surface properties of microalgae. <i>Colloids Surf. B Biointerfaces</i> 112:287&ndash;293, 2013. <span class="doi"><a href="https://doi.org/10.1016/j.colsurfb.2013.08.001">10.1016/j.colsurfb.2013.08.001</a></span></li>
+      <li id="r14">Ozkan A, Berberoglu H. Cell to substratum and cell to cell interactions of microalgae. <i>Colloids Surf. B Biointerfaces</i> 112:302&ndash;309, 2013. <span class="doi"><a href="https://doi.org/10.1016/j.colsurfb.2013.08.007">10.1016/j.colsurfb.2013.08.007</a></span></li>
+      <li id="r15">Garg S, Li Y, Wang L, Schenk PM. Flotation of marine microalgae: Effect of algal hydrophobicity. <i>Bioresource Technology</i> 121:471&ndash;474, 2012. <span class="doi"><a href="https://doi.org/10.1016/j.biortech.2012.06.111">10.1016/j.biortech.2012.06.111</a></span></li>
+      <li id="r16">Garg S, Wang L, Schenk PM. Effective harvesting of low surface-hydrophobicity microalgae by froth flotation. <i>Bioresource Technology</i> 159:437&ndash;441, 2014. <span class="doi"><a href="https://doi.org/10.1016/j.biortech.2014.03.030">10.1016/j.biortech.2014.03.030</a></span></li>
+      <li id="r17">Sutherland KL. Physical Chemistry of Flotation. XI. Kinetics of the Flotation Process. <i>J. Phys. Colloid Chem.</i> 52(2):394&ndash;425, 1948. <span class="doi"><a href="https://doi.org/10.1021/j150458a013">10.1021/j150458a013</a></span></li>
+      <li id="r18">Mika TS, Fuerstenau DW. A Microscopic Model of the Flotation Process. <i>Proc. 8th Int. Mineral Processing Congress</i>, Leningrad, 1968 (no DOI).</li>
+      <li id="r19">Lee C-G, Palsson B&Oslash;. High-density algal photobioreactors using light-emitting diodes. <i>Biotechnology and Bioengineering</i> 44(10):1161&ndash;1167, 1994 (per-cell O<sub>2</sub> rate; BioNumbers BNID 107311). <span class="doi"><a href="https://doi.org/10.1002/bit.260441002">10.1002/bit.260441002</a></span></li>
+    </ol>
+  </div>
+
+  <p class="lic">Independent, non-peer-reviewed analysis of a third-party publication, offered collegially. Text &amp; figures &copy; 2026 Michael German / Steps Ventures, released under CC BY 4.0; code released under the MIT License. Reported experimental values are the property of Ni et al. (2026) and are cited, not redistributed. Order-of-magnitude estimates are labeled throughout.</p>
+</footer>
+
+</div>
+</div>
+</body>
+</html>

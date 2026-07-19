@@ -1,0 +1,15 @@
+species,pH,zeta_mV,error_mV,source
+Chlorella sp.,4.07,-24.667,0.351,NI2026 Fig4
+Chlorella sp.,4.51,-25.033,1.286,NI2026 Fig4
+Chlorella sp.,6.09,-24.500,1.952,NI2026 Fig4
+Chlorella sp.,7.08,-27.967,0.808,NI2026 Fig4
+Chlorella sp.,7.93,-28.900,1.758,NI2026 Fig4
+Chlorella sp.,9.15,-28.467,0.551,NI2026 Fig4
+Chlorella sp.,10.31,-31.800,1.587,NI2026 Fig4
+Ankistrodesmus falcatus,4.04,-11.877,1.704,NI2026 Fig4
+Ankistrodesmus falcatus,5.18,-15.467,2.196,NI2026 Fig4
+Ankistrodesmus falcatus,6.12,-13.767,2.146,NI2026 Fig4
+Ankistrodesmus falcatus,6.98,-14.767,1.747,NI2026 Fig4
+Ankistrodesmus falcatus,8.21,-17.867,1.102,NI2026 Fig4
+Ankistrodesmus falcatus,8.91,-18.133,1.365,NI2026 Fig4
+Ankistrodesmus falcatus,9.95,-24.667,1.193,NI2026 Fig4
