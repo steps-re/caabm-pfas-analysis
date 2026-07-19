@@ -31,7 +31,8 @@ caabm-pfas-analysis/
 │   ├── flotation_ceiling.py        # photosynthetic-bubble removal ceiling vs observed
 │   ├── dlvo_barrier.py             # Chlorella-vs-Ankistrodesmus electrostatic barrier
 │   ├── species_screen.py           # deterministic strain-ranking rubric
-│   └── surface_predictor.py        # genome/cell-wall -> hydrophobicity (honest negative result)
+│   ├── surface_predictor.py        # genome/cell-wall -> hydrophobicity (honest negative result)
+│   └── staging_model.py            # multi-stage / recycle removal compounding (extent path)
 ├── DATASETS.md              # curated catalog of datasets for this + future modeling
 ├── data/                    # values extracted from Ni et al. (2026) SI + literature (cited)
 │   ├── ni2026_removal.csv
@@ -61,6 +62,7 @@ python flotation_ceiling.py        # PFOA ceiling brackets 4.4%; PFBA ceiling <<
 python dlvo_barrier.py             # Chlorella barrier 1.8–3.2× higher than Ankistrodesmus
 python species_screen.py           # ranks 22 candidate strains; retrodicts Ankistrodesmus > Chlorella
 python surface_predictor.py        # tests genome/cell-wall -> hydrophobicity (returns a clean negative result)
+python staging_model.py            # how ~10-14%/pass compounds to >90% removal over N stages
 ```
 
 ## Data provenance & honesty
