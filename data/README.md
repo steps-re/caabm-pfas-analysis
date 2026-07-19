@@ -12,7 +12,8 @@ reported, with per-row source attribution, as is standard for a citing work.
 | `ni2026_zeta.csv` | Cell zeta potential vs pH, in Bold's Basal Medium, for both species | Ni et al. 2026, Fig. 4 |
 | `ni2026_toc.csv` | Effluent total organic carbon vs culturing day (EPS leaching proxy) | Ni et al. 2026, Fig. 4 / S7b |
 | `ni2026_literature_comparison.csv` | Prior algal PFAS-removal results (extent, time, normalized rate) used for the enhancement-factor comparison | Ni et al. 2026, Fig. 6, and the primary sources cited therein |
-| `species_candidates.csv` | Cross-species surface properties for the selection screen | mixed literature (per-row `source` column) |
+| `species_candidates.csv` | Cross-species surface + growth + EPS properties for the selection screen (22 species/strains) | mixed literature; full provenance in `species_sources.md` |
+| `species_sources.md` | Per-source citations, DOIs, and confidence for every value in `species_candidates.csv` | this repo |
 | `pfas_properties.csv` | Carbon number, molar mass, K_ia, surface excess Γ per PFAS | **generated** by `code/interfacial_adsorption.py` |
 
 ## Confidence flags
@@ -24,8 +25,10 @@ reported, with per-row source attribution, as is standard for a citing work.
   of qualitative literature (growth rate, EPS tendency), **not measured values** — they are
   inputs to the screen's lower-weighted terms and should be replaced with measurements as
   they become available.
-- The single largest measurement gap is cell-surface hydrophobicity (contact angle),
-  available for only a few species. Acquiring Ozkan & Berberoglu (2013),
-  *Colloids Surf. B* 112:287 and 112:302, is the highest-value next step.
+- The formerly-largest gap (cell-surface hydrophobicity / contact angle) is now largely
+  filled: the Ozkan & Berberoglu single-method dataset was recovered at high confidence from
+  the first author's open-access dissertation (see `species_sources.md`) and supplies zeta +
+  contact angle for 10 species. Remaining gaps: a few high-ranked species (Chlorococcum,
+  Nannochloropsis) still lack zeta/contact angle and are scored neutral (flagged in the CSV).
 
 Full bibliographic detail with verified DOIs is in `../references.bib`.

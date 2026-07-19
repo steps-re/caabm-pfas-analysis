@@ -71,13 +71,14 @@ def main():
         scored.append((S, gate, missing, r))
     scored.sort(key=lambda t: t[0], reverse=True)
 
-    print(f"{'rank':>4}  {'species (strain)':38}{'zeta':>7}{'CA':>6}{'score':>8}  gaps")
+    print(f"{'rank':>4}  {'species':28}{'class':>10}{'zeta':>7}{'CA':>6}{'score':>7}  gaps")
     for i, (S, gate, missing, r) in enumerate(scored, 1):
-        gated = "" if gate else "  [TOXIN-GATED to 0]"
-        name = f"{r['species']} ({r.get('strain','') or '-'})"[:38]
+        gated = "" if gate else "  [TOXIN-GATED]"
+        name = f"{r['species']}"[:28]
+        cls = (r.get("class", "") or "-")[:10]
         z = r.get("zeta_mV") or "-"
         ca = r.get("contact_angle_deg") or "-"
-        print(f"{i:>4}  {name:38}{z:>7}{ca:>6}{S:>8.1f}  {','.join(missing) or 'complete'}{gated}")
+        print(f"{i:>4}  {name:28}{cls:>10}{z:>7}{ca:>6}{S:>7.1f}  {','.join(missing) or 'ok'}{gated}")
     print("\nNote: missing traits scored neutral (0.5). Acquire measured contact angles")
     print("(e.g. Ozkan & Berberoglu 2013) to resolve the largest data gap.")
 
